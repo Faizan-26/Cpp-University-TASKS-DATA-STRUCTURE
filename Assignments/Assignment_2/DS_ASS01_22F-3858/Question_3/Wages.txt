@@ -1,0 +1,5 @@
+Ali 250
+Ahmad 500
+Jameel 750
+Aziz 600
+Rafique 1600
