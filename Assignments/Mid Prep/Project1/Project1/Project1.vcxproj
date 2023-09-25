@@ -127,9 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplicationStackPreFixPostFix.cpp" />
     <ClCompile Include="CircularSingly.cpp" />
     <ClCompile Include="DoublyLinkedList.cpp" />
     <ClCompile Include="SinglyLinkedList.cpp" />
+    <ClCompile Include="StackApplication.cpp" />
+    <ClCompile Include="StackArrayAdt.cpp" />
+    <ClCompile Include="StackLinkedListADT.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

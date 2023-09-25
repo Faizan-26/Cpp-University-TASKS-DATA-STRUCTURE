@@ -99,6 +99,19 @@
 //			cout << "\n Cannot found given data in Linked List\n";
 //		}
 //	}
+//	void reverseDoubly() {
+//		Node* cur = head;
+//		Node* temp = NULL;
+//		while (cur != NULL) {
+//			temp = cur->prev;
+//			cur->prev = cur->next;
+//			cur->next = temp;
+//			cur = cur->prev;
+//		}
+//		if (temp != NULL) {
+//			head = temp->prev;
+//		}
+//	}
 //};
 //int main() {
 //	Doubly D;
