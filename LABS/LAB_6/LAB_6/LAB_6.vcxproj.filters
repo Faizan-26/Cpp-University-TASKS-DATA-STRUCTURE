@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="QueueArrayADT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueueLinkedListADT.cpp">
+    <ClCompile Include="22F-3858_TASK_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
