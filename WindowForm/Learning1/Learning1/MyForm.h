@@ -88,7 +88,7 @@ namespace Learning1 {
 			// 
 			this->textBox1->Location = System::Drawing::Point(400, 129);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(109, 38);
+			this->textBox1->Size = System::Drawing::Size(99, 38);
 			this->textBox1->TabIndex = 2;
 			// 
 			// label2
@@ -202,21 +202,22 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 
 
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	double result = System::Convert::ToInt16(this->textBox1->Text) + System::Convert::ToUInt16(this->textBox2->Text);
+	double result = System::Convert::ToDouble(this->textBox1->Text) + System::Convert::ToDouble(this->textBox2->Text);
 	this->label2->Text ="RESULT : " + this->textBox1->Text + " + " + this->textBox2->Text + " : " +System::Convert::ToString(result);
 
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-	double result = System::Convert::ToInt16(this->textBox1->Text) - System::Convert::ToUInt16(this->textBox2->Text);
+	double result = System::Convert::ToDouble(this->textBox1->Text) - System::Convert::ToDouble(this->textBox2->Text);
 	this->label2->Text = "RESULT : " + this->textBox1->Text + " - " + this->textBox2->Text + " : " + System::Convert::ToString(result);
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	double result = System::Convert::ToInt16(this->textBox1->Text) * System::Convert::ToUInt16(this->textBox2->Text);
+	double result = System::Convert::ToDouble(this->textBox1->Text) * System::Convert::ToDouble(this->textBox2->Text);
 	this->label2->Text = "RESULT : " + this->textBox1->Text + " * " + this->textBox2->Text + " : " +System::Convert::ToString(result);
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-	double result = System::Convert::ToInt16(this->textBox1->Text) / System::Convert::ToUInt16(this->textBox2->Text);
+	double result = System::Convert::ToDouble(this->textBox1->Text) / System::Convert::ToDouble(this->textBox2->Text);
 	this->label2->Text = "RESULT : "+ this->textBox1->Text +" / " + this->textBox2->Text +" : "+ System::Convert::ToString(result);
+	
 }
 };
 }
