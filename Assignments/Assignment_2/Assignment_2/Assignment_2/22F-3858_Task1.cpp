@@ -6,7 +6,7 @@ using namespace std;
 // Global variables here
 string resultString = " ";
 void menu() {
-    cout << "1.Calculate Data as Postfix.\n2. Calculate Data as Prefix.\n3.Quit.\n";
+    cout << "\n1. Calculate expression as Postfix.\n2. Calculate expression as Prefix.\n3. Quit.\n";
 }
 
 struct Node {
@@ -60,7 +60,12 @@ public:
         }
         return top->data;
     }
-} stakData;
+    void makeNull() {
+        while (!isEmpty()) {
+            pop();
+        }
+    }
+} stakData, stakCalculate;
 
 bool isOperator(string op) {
     if (op == "+" || op == "-" || op == "*" || op == "/" || op == "%")
@@ -75,7 +80,34 @@ int getPrecedence(string op) {
         return 2;
     return 0;
 }
-
+int performOperation(string op ,int operand1, int operand2) {
+    if (op == "+")
+        return operand1 + operand2;
+    else if (op == "-")
+        return operand1 - operand2;
+    else if (op == "*")
+        return operand1 * operand2;
+    else if (op == "/")
+        return operand1 / operand2;
+    else if (op == "%")
+        return operand1 % operand2;
+    else
+        cout << "\nInvalid Operator!!\n";
+    return 0;
+}
+void evaluatePostexpression(string ch) { //symb = next input character;
+    if (!isOperator(ch) && ch != "(" && ch != ")") { //if (symb is an operand)
+        stakCalculate.push(ch); //push(opndstk, symb)
+   }
+    else { // if ch is operator
+        int operand1, operand2;
+        operand1 =stoi(stakCalculate.pop());
+        operand2 = stoi(stakCalculate.pop()); // convert string into number
+        // now perfrom calculation and store them in result using operand1 and operand2 and ch will be operator
+        int result = performOperation(ch, operand1, operand2); // perform operaiton according to ch
+        stakCalculate.push(to_string(result)); // convert result to string and paush in stack
+    }
+}
 void convertToPostfix(string ch) {
     if (!isOperator(ch) && ch != "(" && ch != ")") {
         resultString += ch + " ";
@@ -97,6 +129,7 @@ void convertToPostfix(string ch) {
         }
         stakData.push(ch);
     }
+
 }
 
 void convertPostExpression() {
@@ -104,16 +137,39 @@ void convertPostExpression() {
     cout << "\nEnter Your Expression (with spaces): ";
     string expression, token;
     getline(cin, expression); // get input with spaces
-
-    istringstream tokenStream(expression); // create instance of expression in tokenStream
-    while (getline(tokenStream, token, ' ')) { // read tokenStream until it get ' ' or end of expression
-        convertToPostfix(token); // if not ' ' then do this 
+    for (int i = 0; i < expression.length(); i++)
+    {
+        if (expression[i] == ' ') {
+            continue;
+        }
+        else {
+            token = expression[i];
+            convertToPostfix(token);
+        }
     }
 
     while (!stakData.isEmpty()) {
         resultString += stakData.pop() + " ";
     }
-    cout << "Your Postfix Expression: " << resultString << endl;
+    cout << "\nYour Postfix Expression: " << resultString << endl;
+    cout << "Now Calculating POSTFix expression.\n";
+    stakCalculate.makeNull(); // make sure stack is already empty if not then make it empty
+    // now calculate result string
+    token = " ";
+    for (int i = 0; i < resultString.length(); i++)
+    {
+        if (resultString[i] == ' ') {
+            continue;
+        }
+        else {
+            token = resultString[i];
+            evaluatePostexpression(token);
+        }
+    }
+    string result = " ";
+    result = stakCalculate.pop();
+    cout << "Result of expression is :" << result << endl;
+
 }
 
 
@@ -164,13 +220,30 @@ void convertPreExpression() {
         prefixExpression += resultString[i];
     }
 
-    cout << "Your Prefix Expression: " << prefixExpression << endl;
+    cout << "\nYour Prefix Expression: " << prefixExpression << endl;
+    // now calculate the preExpression 
+    cout << "Now calculating your Prefix expression.\n";
+    stakCalculate.makeNull(); // make sure stack is already empty if not then make it empty
+    token = " "; // reset token value
+    for (int i = prefixExpression.length()-1; i >= 0; i--)
+    {
+        if (prefixExpression[i] == ' ') {
+            continue;
+        }
+        else {
+            token = prefixExpression[i];
+            evaluatePostexpression(token);
+        }
+    }
+    string result = stakCalculate.pop();
+    cout << "Result of prefix expression is :" << result << endl;
 }
 
 int main() {
     int choice = 0;
     while (1) {
         menu();
+        cout << "Select Option :";
         cin >> choice;
         cin.ignore();
 
@@ -187,3 +260,4 @@ int main() {
     }
     return 0;
 }
+
