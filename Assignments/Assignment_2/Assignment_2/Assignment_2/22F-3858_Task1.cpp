@@ -1,10 +1,10 @@
 #include<iostream>
 #include<string>
-#include<sstream>
 using namespace std;
 
 // Global variables here
 string resultString = " ";
+
 void menu() {
     cout << "\n1. Calculate expression as Postfix.\n2. Calculate expression as Prefix.\n3. Quit.\n";
 }
@@ -95,7 +95,7 @@ int performOperation(string op ,int operand1, int operand2) {
         cout << "\nInvalid Operator!!\n";
     return 0;
 }
-void evaluatePostexpression(string ch) { //symb = next input character;
+void evaluatePreexpression(string ch) { //symb = next inputS character;
     if (!isOperator(ch) && ch != "(" && ch != ")") { //if (symb is an operand)
         stakCalculate.push(ch); //push(opndstk, symb)
    }
@@ -108,6 +108,20 @@ void evaluatePostexpression(string ch) { //symb = next input character;
         stakCalculate.push(to_string(result)); // convert result to string and paush in stack
     }
 }
+void evaluatePostexpression(string ch) {
+    if (!isOperator(ch) && ch != "(" && ch != ")") {
+        stakCalculate.push(ch); // Push operands onto the stack
+    }
+    else  { // If ch is an operator
+       
+        int operand1 = stoi(stakCalculate.pop());
+        int operand2 = stoi(stakCalculate.pop());
+        int result = performOperation(ch, operand2, operand1);
+        cout <<"RESULT HERE" << result<<endl;
+        stakCalculate.push(to_string(result));
+    }
+}
+
 void convertToPostfix(string ch) {
     if (!isOperator(ch) && ch != "(" && ch != ")") {
         resultString += ch + " ";
@@ -232,7 +246,7 @@ void convertPreExpression() {
         }
         else {
             token = prefixExpression[i];
-            evaluatePostexpression(token);
+            evaluatePreexpression(token);
         }
     }
     string result = stakCalculate.pop();
@@ -260,4 +274,3 @@ int main() {
     }
     return 0;
 }
-
