@@ -216,7 +216,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 	double result = System::Convert::ToDouble(this->textBox1->Text) / System::Convert::ToDouble(this->textBox2->Text);
-	this->label2->Text = "RESULT : "+ this->textBox1->Text +" / " + this->textBox2->Text +" : "+ System::Convert::ToString(result);
+	this->label2->Text = "RESULT : "+ this->textBox1->Text +" / " + this->textBox2->Text +" : "+ System::Convert::ToString(result) ;
 	
 }
 };
