@@ -21,5 +21,8 @@
     <ClCompile Include="hashQuadraticeProb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="chainHashing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="chainHashing.cpp" />
     <ClCompile Include="hashQuadraticeProb.cpp" />
     <ClCompile Include="task.cpp" />
   </ItemGroup>
