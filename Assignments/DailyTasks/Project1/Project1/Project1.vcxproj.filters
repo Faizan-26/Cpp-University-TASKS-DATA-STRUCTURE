@@ -21,5 +21,11 @@
     <ClCompile Include="QueueLinkedListADT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="doubleEndedQUeue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="avladt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

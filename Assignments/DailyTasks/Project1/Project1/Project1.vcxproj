@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="avladt.cpp" />
+    <ClCompile Include="doubleEndedQUeue.cpp" />
     <ClCompile Include="QueueArrayADT.cpp" />
     <ClCompile Include="QueueLinkedListADT.cpp" />
   </ItemGroup>
