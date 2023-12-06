@@ -218,22 +218,22 @@
 //
 //    return 0;
 //}
-
-#include<iostream>
-using namespace std;
-int main() {
-int m = 7, n = m / 2 + 1;
-char ch = '+';
-for (int i = 0; i < n - 1; i++){
-	for (int j = 0; j < i; j++)
-		cout << " ";
-	for (int j = 0; j < m; j++) {
-		if (j == m - 1 || j == 0)
-			cout << ch;
-		else
-			cout << " ";
-	}
-	m = m - 2;
-	cout << endl;
-}
-}
+//
+//#include<iostream>
+//using namespace std;
+//int main() {
+//int m = 7, n = m / 2 + 1;
+//char ch = '+';
+//for (int i = 0; i < n - 1; i++){
+//	for (int j = 0; j < i; j++)
+//		cout << " ";
+//	for (int j = 0; j < m; j++) {
+//		if (j == m - 1 || j == 0)
+//			cout << ch;
+//		else
+//			cout << " ";
+//	}
+//	m = m - 2;
+//	cout << endl;
+//}
+//}

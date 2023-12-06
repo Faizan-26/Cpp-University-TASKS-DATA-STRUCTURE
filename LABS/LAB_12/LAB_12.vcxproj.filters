@@ -15,19 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="QueueArrayADT.cpp">
+    <ClCompile Include="22F-3858_TASK_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QueueLinkedListADT.cpp">
+    <ClCompile Include="22F-3858_TASK_2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="doubleEndedQUeue.cpp">
+    <ClCompile Include="22F-3858_TASK_3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="avladt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="temp.cpp">
+    <ClCompile Include="22F-3858_TASK_4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

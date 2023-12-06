@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b8ef860c-a294-4067-86d5-5891483ab376}</ProjectGuid>
-    <RootNamespace>Project1</RootNamespace>
+    <ProjectGuid>{0d579625-f0a1-48bf-bffc-a00155b4b472}</ProjectGuid>
+    <RootNamespace>DictionaryPROJECTDataStructure</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,11 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="avladt.cpp" />
-    <ClCompile Include="doubleEndedQUeue.cpp" />
-    <ClCompile Include="QueueArrayADT.cpp" />
-    <ClCompile Include="QueueLinkedListADT.cpp" />
-    <ClCompile Include="temp.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

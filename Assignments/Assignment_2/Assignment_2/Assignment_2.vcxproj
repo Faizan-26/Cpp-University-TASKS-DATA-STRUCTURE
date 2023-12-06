@@ -131,6 +131,7 @@
     <ClCompile Include="22F-3858_TASK2.cpp" />
     <ClCompile Include="22F-3858_TASK3.cpp" />
     <ClCompile Include="22F-3858_TASK4.cpp" />
+    <ClCompile Include="QUESTION1_DISCRETE_STRUCTURE.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
