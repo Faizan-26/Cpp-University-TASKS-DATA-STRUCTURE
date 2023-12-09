@@ -1,61 +1,87 @@
-//#include<iostream>
+//#include <iostream>
 //using namespace std;
 //
-//const int vertices = 4;
+//struct Edge
+//{
+//	int des;
+//	int weight;
+//};
 //
-//int getMinimum(bool inSPT[], int dist[]) {
-//    int minDist = INT_MAX, minIndex = -1;
+//class Graph
+//{
+//	int V;
+//	Edge** adj;
+//public:
+//	Graph(int V) : V(V)
+//	{
+//		adj = new Edge * [V];
+//		for (int i = 0; i < V; ++i)
+//		{
+//			adj[i] = new Edge[V];
+//			for (int j = 0; j < V; ++j)
+//			{
+//				adj[i][j].des = -1;
+//				adj[i][j].weight = -1;
+//			}
+//		}
+//	}
+//	void addEdge(int src, int des, int weight)
+//	{
+//		adj[src][des].des = des;
+//		adj[src][des].weight = weight;
+//		adj[des][src].des = src;
+//		adj[des][src].weight = weight;
+//	}
+//	void dijkstra(int src)
+//	{
+//		int* dist;
+//		dist = new int[V];
 //
-//    for (int v = 0; v < vertices; ++v) {
-//        if (!inSPT[v] && dist[v] < minDist) {
-//            minDist = dist[v];
-//            minIndex = v;
-//        }
-//    }
+//		bool* visited = new bool[V];
+//		for (int i = 0; i < V; ++i)
+//		{
+//			dist[i] = INT_MAX;
+//			visited[i] = false;
+//		}
+//		dist[src] = 0;
+//		for (int i = 0; i < V - 1; ++i)
+//		{
+//			int u = -1;
+//			for (int j = 0; j < V; ++j)
+//			{
+//				if (!visited[j] && (u == -1 || dist[j] < dist[u]))
+//				{
+//					u = j;
+//				}
+//			}
+//			visited[u] = true;
+//			for (int v = 0; v < V; ++v)
+//			{
+//				if (!visited[v] && adj[u][v].weight != -1 && dist[u] + adj[u][v].weight < dist[v])
+//				{
+//					dist[v] = dist[u] + adj[u][v].weight;
+//				}
+//			}
+//		}
+//		cout << "Results:\n";
+//		for (int i = 0; i < V; ++i)
+//		{
+//			cout << "Vertex " << i << ": " << dist[i] << '\n';
+//		}
+//	}
+//};
 //
-//    return minIndex;
-//}
-//
-//void Dijkstra(int graph[vertices][vertices], int src) {
-//    int dist[vertices];    // The output array dist[i] holds the shortest distance from src to i
-//    bool inSPT[vertices];   // inSPT[i] will be true if vertex i is included in the shortest path tree or the shortest distance from src to i is finalized
-//
-//    for (int i = 0; i < vertices; ++i) {
-//        dist[i] = INT_MAX;
-//        inSPT[i] = false;
-//    }
-//
-//    dist[src] = 0;
-//
-//    for (int count = 0; count < vertices - 1; ++count) {
-//        int u = getMinimum(inSPT, dist);
-//
-//        inSPT[u] = true;
-//
-//        for (int v = 0; v < vertices; ++v) {
-//            if (!inSPT[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v] ) {
-//                dist[v] = dist[u] + graph[u][v];
-//            }
-//        }
-//    }
-//
-//    // Print the shortest distances
-//    cout << "Vertex   Distance from Source\n";
-//    for (int i = 0; i < vertices; ++i)
-//        cout << i << "        " << dist[i] << endl;
-//}
-//
-//int main() {
-//    int graph[vertices][vertices] = {
-//        {0, 2, 3, 4},
-//        {2, 0, 1, 6},
-//        {3, 1, 0, 4},
-//        {4, 6, 4, 0},
-//    };
-//
-//    int source = 0;
-//
-//    Dijkstra(graph, source);
-//
-//    return 0;
+//int main()
+//{
+//	Graph g(4);
+//	g.addEdge(0, 1, 2);
+//	g.addEdge(0, 3, 6);
+//	g.addEdge(2, 1, 12);
+//	g.addEdge(3, 2, 9);
+//	int start_Ver = 0;
+//	cout << "ENter Starting vertix :";
+//	cin>>start_Ver;
+//	g.dijkstra(start_Ver);
+//	system("pause");
+//	return 0;
 //}

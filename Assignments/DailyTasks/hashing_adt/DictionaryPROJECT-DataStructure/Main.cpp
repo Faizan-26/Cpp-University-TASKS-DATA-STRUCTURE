@@ -7,8 +7,36 @@
 
 using namespace std;
 
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define ESC_KEY 27
+
+const int ROWS = 10;
+int activeSuggestionIndex = 0; // for managing suggestion to store in correct index of array
+int arrowDisplayIndex = 0;
+struct Suggestion {
+    string suggestionString;
+    string isActive = "  ";
+    
+} SuggestionArray[ROWS];
+
+void displaySuggestionList() {
+    for (int i = 0; i < ROWS; i++)
+    {
+        if (SuggestionArray[i].suggestionString == "") continue;
+        cout << SuggestionArray[i].isActive <<SuggestionArray[i].suggestionString << endl;
+    }
+}
+
+void resetSuggestionList(int index) { // this index tell from where to start reseting SuggestionArray
+    arrowDisplayIndex = 0;
+    for (int i = index; i < ROWS; i++)
+    {
+        SuggestionArray[i].suggestionString = "";
+    }
+}
 struct TrieNode {
-    TrieNode* children[26]; 
+    TrieNode* children[26];
     bool isWordEnd; // tells if word in completed 
     string meaning; // contains meaning of word 
 
@@ -64,9 +92,9 @@ public:
         }
         cout << "\nWord: " << word;
         cout << "\nMeaning: " << curNode->meaning;
-    } 
-    
-    void editWord(string word , string meaning) {
+    }
+
+    void editWord(string word, string meaning) {
         TrieNode* curNode = root;
         for (int i = 0; i < word.length(); i++) {
             char cur = word[i];
@@ -159,13 +187,16 @@ public:
     }
 
     // Recursive function to print auto-suggestions for given node.
-    void suggestionsRec(TrieNode* cur, string& currPrefix, int &count) {
+    void suggestionsRec(TrieNode* cur, string& currPrefix, int& count) {
         if (count >= 10) { // limit displaying number of maximum suggestions
             return;
         }
         if (cur->isWordEnd) {
-            cout << currPrefix;
-            cout << endl;
+            //cout << currPrefix;
+            //cout << endl;
+            SuggestionArray[activeSuggestionIndex].suggestionString = currPrefix;
+            activeSuggestionIndex++;
+            resetSuggestionList(activeSuggestionIndex);// for reseting suggestion that i don't want to display
             count++;
         }
 
@@ -185,13 +216,13 @@ public:
     int getSuggestions(string wordTosuggest) {
         return printAutoSuggestions(root, wordTosuggest);
     }
-   
+
     int printAutoSuggestions(TrieNode* Root, string wordTosuggest) {
         TrieNode* pCrawl = Root;
         int level; //current depth
         int n = wordTosuggest.length(); // n is length of word
         for (level = 0; level < n; level++) {
-            int index = wordTosuggest[level] -'a';
+            int index = wordTosuggest[level] - 'a';
 
             if (!pCrawl->children[index]) // children[index] == NULL
                 return 0;
@@ -203,7 +234,10 @@ public:
         bool isLast = isEmptyNode(pCrawl); // isEmptyNode Checks next children node to pCrawl that it is completly NULL or not
 
         if (isWord && isLast) { // if it is both word and last word then print it 
-            cout << wordTosuggest << endl;
+           // cout << wordTosuggest << endl;
+            SuggestionArray[activeSuggestionIndex].suggestionString = wordTosuggest;
+            activeSuggestionIndex++;
+            resetSuggestionList(activeSuggestionIndex);// for reseting suggestion that i don't want to display
             return -1;
         }
 
@@ -218,7 +252,7 @@ public:
 };
 
 void menu() {
-    cout << "\n1. Add Word.\n2. Delete Word.\n3. Search Word.\n4. Suggest Word.\n5. Edit word.\n6. Save and Exit.\n";
+    cout << "\n0.Refresh Screen.\n1. Add Word.\n2. Delete Word.\n3. Search Word.\n4. Suggest Word.\n5. Edit word.\n6. Save and Exit.\n";
 }
 
 string toLowerCase(string S) {
@@ -228,7 +262,11 @@ string toLowerCase(string S) {
     }
     return S;
 }
+bool isAlphabet(char key) {
+    return key >= 'A' && key <= 'Z' || key >= 'a' && key <= 'z';
+}
 int main() {
+    system("Color E4");
     Trie dict;
     dict.loadDataFromFile();
     int choice = 0;
@@ -237,15 +275,21 @@ int main() {
     while (true) {
         menu();
         cin >> choice;
+        if (choice == 0) {
+            system("CLS");
+        }
         if (choice == 1) {
             string word, meaning;
             cout << "\nEnter Word :";
-            cin >> word;
+            cin.ignore();// without this control ignores user to input his word..
+            getline(cin, word); // gets input in string with spaces..
             word = toLowerCase(word);
             if (!dict.search(word)) {
                 cout << "Enter Meaning :";
-                cin >> meaning;
-               meaning = toLowerCase(meaning);
+                getline(cin, meaning); 
+                cout << meaning << endl;
+                meaning = toLowerCase(meaning);
+                cout << meaning << endl;
                 dict.insert(word, meaning);
             }
             else {
@@ -255,7 +299,8 @@ int main() {
         else if (choice == 2) {
             string word;
             cout << "\nEnter Word to delete :";
-            cin >> word;
+            cin.ignore();
+            getline(cin, word);
             word = toLowerCase(word);
             if (dict.search(word)) {
                 dict.deleteWord(word);
@@ -267,7 +312,8 @@ int main() {
         else if (choice == 3) {
             string word;
             cout << "\nEnter Word to find meaning :";
-            cin >> word;
+            cin.ignore();
+            getline(cin, word);
             word = toLowerCase(word);
             if (dict.search(word)) {
                 dict.findMeaning(word);
@@ -279,14 +325,22 @@ int main() {
         else if (choice == 4) {
             cout << "\nEnter the word to suggest: ";
             currentInput = "";
-            while (true) {
+            bool exit = false;
+            while (!exit) {
                 if (_kbhit()) {
-                    char key = _getch();
-                    cout << key;
-                    if (key == 13) { // Enter key pressed
+                    char key = _getch(); // Use _getwch() for arrow keys
+                    switch (key) {
+                    case 13: // Enter key pressed
+                        currentInput = SuggestionArray[arrowDisplayIndex].suggestionString;
+                        system("cls");
+                        menu();
+                        cout << "Current Input: " << currentInput;
+                        cout << endl;
+                        if (dict.search(currentInput)) {
+                            dict.findMeaning(currentInput);
+                        }
                         break;
-                    }
-                    else if (key == 8) { // Backspace key pressed
+                    case 8: //  Backspace key pressed
                         if (!currentInput.empty()) {
                             currentInput.pop_back(); // removes last character and reduce size by 1
                             system("cls");
@@ -296,29 +350,68 @@ int main() {
                             }
                             cout << "Current Input: " << currentInput;
                         }
-                    }
-                    if (isalpha(key)) {
-                        currentInput += tolower(key); // if case is upper it convert that into lower
+                        break;
+                    case KEY_UP:
+                        SuggestionArray[arrowDisplayIndex].isActive = "  ";
+                        if (arrowDisplayIndex == 0) arrowDisplayIndex = 9;
+                        else {
+                            arrowDisplayIndex--;
+                        }
+                        if (SuggestionArray[arrowDisplayIndex].suggestionString == "") {
+                            arrowDisplayIndex = 0;
+                        }
+                        SuggestionArray[arrowDisplayIndex].isActive = "->";
                         system("cls");
                         menu();
                         cout << "Current Input: " << currentInput;
                         cout << endl;
-                        dict.printAutoSuggestions(dict.getRoot(), currentInput);
+                        displaySuggestionList();
+                        break;
+                    case KEY_DOWN:
+                        SuggestionArray[arrowDisplayIndex].isActive = "  ";
+                        arrowDisplayIndex = (arrowDisplayIndex + 1) % 10;
+                        if (SuggestionArray[arrowDisplayIndex].suggestionString == "") {
+                            arrowDisplayIndex--;
+                        }
+                        SuggestionArray[arrowDisplayIndex].isActive = "->";
+                        system("cls");
+                        menu();
+                        cout << "Current Input: " << currentInput;
+                        cout << endl;
+                        displaySuggestionList();
+                        break;
+                    case ESC_KEY:
+                        system("CLS");
+                        exit = true;
+                        break;
+                    default:
+                        if (isAlphabet(key)) {
+                        cout << key;
+                            activeSuggestionIndex = 0;
+                            resetSuggestionList(activeSuggestionIndex);
+                            currentInput += tolower(key); // if case is upper it convert that into lower
+                            system("cls");
+                            menu();
+                            cout << "Current Input: " << currentInput;
+                            cout << endl;
+                            dict.printAutoSuggestions(dict.getRoot(), currentInput);
+                            displaySuggestionList();
+                        }
+                        break;
                     }
-                    else if(key!= 8) {
-                        cout << "\nInvalid Input!!!\n";
-                    }
+                
                 }
-            }
+            } 
         }
         else if (choice == 5) {
             string word, meaning = "";
             cout << "\nEnter Word to edit :";
-            cin >> word;
+            cin.ignore();
+            getline(cin, word);
             word = toLowerCase(word);
             if (dict.search(word)) {
                 cout << "Enter new meaning : ";
-                cin >> meaning;
+                getline(cin, meaning);
                 meaning = toLowerCase(meaning);
                 dict.editWord(word, meaning);
             }
@@ -330,7 +423,7 @@ int main() {
             dict.safeToFile();
             break;
         }
-        else {
+        else if(choice != 0){
             cout << "\nWrong Input.\n";
         }
     }
