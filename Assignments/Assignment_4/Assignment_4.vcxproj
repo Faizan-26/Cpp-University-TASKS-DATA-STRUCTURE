@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Task_1.cpp" />
+    <ClCompile Include="22F-3858_TASK3.cpp" />
+    <ClCompile Include="22F-3858_Task4.cpp" />
+    <ClCompile Include="22F-3858_Task_1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,7 @@ namespace Dictionary {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Runtime::InteropServices;
 
 	/// <summary>
 	/// Summary for Home
@@ -73,15 +74,16 @@ namespace Dictionary {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Cooper Black", 16.1194F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(201, 119);
+			this->label1->Location = System::Drawing::Point(238, 205);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(181, 35);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Dictionary";
+			this->label1->Click += gcnew System::EventHandler(this, &Home::label1_Click);
 			// 
 			// search
 			// 
-			this->search->Location = System::Drawing::Point(138, 308);
+			this->search->Location = System::Drawing::Point(159, 297);
 			this->search->Margin = System::Windows::Forms::Padding(5);
 			this->search->Name = L"search";
 			this->search->Size = System::Drawing::Size(361, 22);
@@ -91,7 +93,7 @@ namespace Dictionary {
 			// 
 			// insertButton
 			// 
-			this->insertButton->Location = System::Drawing::Point(118, 420);
+			this->insertButton->Location = System::Drawing::Point(111, 358);
 			this->insertButton->Name = L"insertButton";
 			this->insertButton->Size = System::Drawing::Size(106, 56);
 			this->insertButton->TabIndex = 4;
@@ -101,16 +103,18 @@ namespace Dictionary {
 			// 
 			// deleteButton
 			// 
-			this->deleteButton->Location = System::Drawing::Point(244, 420);
+			this->deleteButton->Location = System::Drawing::Point(244, 358);
 			this->deleteButton->Name = L"deleteButton";
+			this->deleteButton->Padding = System::Windows::Forms::Padding(5);
 			this->deleteButton->Size = System::Drawing::Size(87, 56);
 			this->deleteButton->TabIndex = 5;
 			this->deleteButton->Text = L"Delete";
 			this->deleteButton->UseVisualStyleBackColor = true;
+			this->deleteButton->Click += gcnew System::EventHandler(this, &Home::deleteButton_Click);
 			// 
 			// searchButton
 			// 
-			this->searchButton->Location = System::Drawing::Point(371, 420);
+			this->searchButton->Location = System::Drawing::Point(364, 358);
 			this->searchButton->Name = L"searchButton";
 			this->searchButton->Size = System::Drawing::Size(82, 56);
 			this->searchButton->TabIndex = 6;
@@ -119,7 +123,7 @@ namespace Dictionary {
 			// 
 			// suggestButton
 			// 
-			this->suggestButton->Location = System::Drawing::Point(297, 501);
+			this->suggestButton->Location = System::Drawing::Point(473, 358);
 			this->suggestButton->Name = L"suggestButton";
 			this->suggestButton->Size = System::Drawing::Size(98, 56);
 			this->suggestButton->TabIndex = 7;
@@ -130,7 +134,7 @@ namespace Dictionary {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(777, 669);
+			this->ClientSize = System::Drawing::Size(723, 669);
 			this->Controls->Add(this->suggestButton);
 			this->Controls->Add(this->searchButton);
 			this->Controls->Add(this->deleteButton);
@@ -154,5 +158,10 @@ namespace Dictionary {
 	private: System::Void insertButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		
 	}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void deleteButton_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }

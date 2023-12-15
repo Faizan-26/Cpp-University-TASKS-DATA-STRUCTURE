@@ -124,6 +124,7 @@
     <ClCompile Include="Home.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dictionary.h" />
     <ClInclude Include="Home.h">
       <FileType>CppForm</FileType>
     </ClInclude>
