@@ -1,67 +1,73 @@
-// #include<iostream>
-// using namespace std;
-// struct Node {
-// 	int data;
-// 	Node* next;
-// 	Node() {
-// 		data = 0;
-// 		next = NULL;
-// 	}
-// 	Node(int data) {
-// 		this->data = data;
-// 		next = NULL;
-// 	}
-// };
-// class StackAdt {
-// 	Node* top;
-// public:
-// 	StackAdt() {
-// 		top = NULL;
-// 	}
-// 	bool isEmpty() {
-// 		return top == NULL;
-// 	}
-// 	bool push(int data) {
-// 		Node* newNode = new Node(data);
-// 		newNode->next = top;
-// 		top = newNode;
-// 		return true;
-// 	}
-// 	bool pop(int &tempData) {
-// 		if (isEmpty()) {
-// 			return false;
-// 		}
-// 		Node* tempNode = top;
-// 		tempData = tempNode->data;
-// 		top = tempNode->next;
-// 		delete tempNode;
-// 	}
-// 	void displayStack() {
-// 		Node* cur = top;
+#include<iostream>
+using namespace std;
+struct Node {
+	int data;
+	Node* next;
+	Node() {
+		data = 0;
+		next = NULL;
+	}
+	Node(int data) {
+		this->data = data;
+		next = NULL;
+	}
+};
 
-// 		cout << endl;
-// 		while (cur != NULL) {
-// 			cout << cur->data << "   ";
-// 			cur = cur->next;
-// 		}
-// 		cout << endl;
-// 	}
-// 	~StackAdt() {
-// 		int n;
-// 		while (top != NULL) {
-// 			pop(n);
-// 		}
-// 		delete top;
-// 	}
-// };
-// int main() {
-// 	StackAdt s;
-// 	s.push(1);
-// 	s.push(2);
-// 	s.push(3);
-// 	s.displayStack();
-// 	int x;
-// 	s.pop(x);
-// 	s.displayStack();
-// 	return 0;
-// }
+class StackAdt {
+Node* top;
+public:
+    StackAdt() {
+        top = NULL;
+    }
+    void push(int data) {
+        Node* temp = new Node(data);
+        if (top == NULL) {
+            top = temp;
+        }
+        else {
+            temp->next = top;
+            top = temp;
+        }
+    }
+    void pop(int& data) {
+        if (top == NULL) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+        else {
+            data = top->data;
+            Node* temp = top;
+            top = top->next;
+            delete temp;
+        }
+    }
+    void peek(int& data) {
+        if (top == NULL) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+        else {
+            data = top->data;
+        }
+    }
+    void displayStack() {
+        Node* temp = top;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+
+};
+int main() {
+	StackAdt s;
+	s.push(1);
+	s.push(2);
+	s.push(3);
+	s.displayStack();
+	int x;
+	s.pop(x);
+	s.displayStack();
+	return 0;
+}
