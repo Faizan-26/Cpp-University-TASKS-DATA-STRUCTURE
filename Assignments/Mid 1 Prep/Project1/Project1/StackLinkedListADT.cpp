@@ -14,7 +14,7 @@ struct Node {
 };
 
 class StackAdt {
-Node* top;
+Node* top; 
 public:
     StackAdt() {
         top = NULL;

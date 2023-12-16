@@ -561,15 +561,21 @@ int main() {
             }
             else if (choice == "6") {
                 dict.safeToFile();
+                 // i want to redirect user to my github when he /she exit from program
+                system("CLS");
+                system("start https://github.com/Faizan-26/Cpp-University-TASKS-DATA-STRUCTURE-SEM-3");
                 break;
             }
             else {
-                throw "Invalid Input!!";
+              throw "Invalid Input!";
             }
         }
     }
-    catch (...) {
-        goto againStart;
-    }
+    catch (const char* msg) {
+		cout << msg << endl;
+		cout << "Press any key to continue...";
+		_getch();
+		goto againStart;
+	}
     return 0;
 }
