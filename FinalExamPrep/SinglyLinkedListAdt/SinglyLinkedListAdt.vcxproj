@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="binaryTree.cpp" />
     <ClCompile Include="circularSinglyLinkedList.cpp" />
     <ClCompile Include="doublyLinkedList.cpp" />
     <ClCompile Include="queueARRAYADT.cpp" />
+    <ClCompile Include="queueLinkedListADT.cpp" />
     <ClCompile Include="SingleLinkedListADT.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
