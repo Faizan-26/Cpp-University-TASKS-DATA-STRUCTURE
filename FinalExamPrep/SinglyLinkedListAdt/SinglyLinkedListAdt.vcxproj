@@ -131,10 +131,11 @@
     <ClCompile Include="binaryTree.cpp" />
     <ClCompile Include="circularSinglyLinkedList.cpp" />
     <ClCompile Include="doublyLinkedList.cpp" />
+    <ClCompile Include="graph.cpp" />
+    <ClCompile Include="heapADT.cpp" />
     <ClCompile Include="queueARRAYADT.cpp" />
     <ClCompile Include="queueLinkedListADT.cpp" />
     <ClCompile Include="SingleLinkedListADT.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
