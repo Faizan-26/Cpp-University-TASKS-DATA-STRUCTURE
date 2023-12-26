@@ -1,318 +1,499 @@
-//#include<iostream>
-//#include<queue>
+//#include <iostream>
+//#include <cstring>
 //using namespace std;
+//// for dijecksra algorithm
 //
-//
-//
-//class minHeap {
-//    int* arr;
-//    int size;
-//    int totalItems;
-//public:
-//    minHeap() {
-//        arr = new  int[10]; // by default have size of 10
-//        size = 10;
-//        totalItems = 0;
-//    }
-//
-//    minHeap(int S) {
-//        size = S;
-//        arr = new int[size];
-//        totalItems = 0;
-//    }
-//
-//    int getMin() {
-//        return arr[1];
-//    }
-//
-//    void perculateUp(int index) {
-//        while (index > 1 && arr[index] >= arr[index / 2]) {
-//            swap(arr[index], arr[index / 2]);
-//            index = index / 2;
-//        }
-//    }
-//
-//    void perculateDown(int index) {
-//        int smallerChild = index;
-//        while (true) {
-//            if (index * 2 < size && arr[index * 2] < arr[index]) {
-//                smallerChild = index * 2;
-//            }
-//            if (index * 2 + 1 < size && arr[index * 2 + 1] < arr[index]) {
-//                smallerChild = index * 2 + 1;
-//            }
-//            if (smallerChild == index) {
-//                break;
-//            }
-//            swap(arr[index], arr[smallerChild]);
-//            index = smallerChild;
-//        }
-//    }
-//    void insert(int data) {
-//        if (totalItems == size - 1) {
-//            cout << "Heap is full\n";
-//            return;
-//        }
-//        else {
-//            ++totalItems;
-//            arr[totalItems] = data;
-//            perculateUp(totalItems);
-//        }
-//    }
-//
-//    bool isEmpty() {
-//        return totalItems==0;
-//    }
-//
-//    void extractMin() {
-//        cout << arr[1] << " deleted.\n";
-//        arr[1] = arr[totalItems--]; // this 1st assign the last element to the root and then decrease the totalItems
-//        perculateDown(1);
-//    }
-//    void display() {
-//        for (int i = 1; i <= totalItems; i++) {
-//            cout << arr[i] << " ";
-//        }
-//        cout << endl;
-//    }
-//};
-//
-//
-//
-//struct StackNode {
+//const int NULL_EDGE = 0;
+//const int INFINITY_VALUE = 1000000;
+//struct node
+//{
 //    int data;
-//    StackNode* next;
-//    StackNode() {
+//    node* next;
+//
+//    node()
+//    {
 //        data = 0;
 //        next = NULL;
 //    }
-//    StackNode(int data) {
+//    node(int data)
+//    {
 //        this->data = data;
 //        next = NULL;
 //    }
 //};
+//class queue
+//{
+//private:
+//    node* frontQ;
+//    node* rear;
 //
-//class StackAdt {
 //public:
-//    StackNode* top;
-//    StackAdt() {
-//        top = NULL;
-//    }
-//    void push(int data) {
-//        StackNode* temp = new StackNode(data);
-//        if (top == NULL) {
-//            top = temp;
+//    queue() { frontQ = rear = NULL; }
+//    void push(int data)
+//    {
+//        node* temp = new node(data);
+//        if (frontQ == NULL)
+//        {
+//            frontQ = temp;
+//            rear = temp;
 //        }
-//        else {
-//            temp->next = top;
-//            top = temp;
+//        else
+//        {
+//            rear->next = temp;
+//            rear = temp;
 //        }
 //    }
-//    bool isEmpty() {
-//        return top == NULL;
-//    }
-//    void pop(int& data) {
-//        if (top == NULL) {
-//            cout << "Stack is empty" << endl;
-//            return;
+//    void pop()
+//    {
+//        if (frontQ == NULL)
+//        {
+//            cout << "Queue is empty\n";
 //        }
-//        else {
-//            data = top->data;
-//            StackNode* temp = top;
-//            top = top->next;
+//        else
+//        {
+//            node* temp = frontQ;
+//            frontQ = frontQ->next;
 //            delete temp;
 //        }
 //    }
-//    void peek(int& data) {
-//        if (top == NULL) {
-//            cout << "Stack is empty" << endl;
-//            return;
+//    int top()
+//    {
+//        if (frontQ == NULL)
+//        {
+//            cout << "Queue is empty\n";
+//            return -1;
 //        }
-//        else {
-//            data = top->data;
+//        else
+//        {
+//            return frontQ->data;
 //        }
 //    }
-//    void displayStack() {
-//        StackNode* temp = top;
-//        while (temp != NULL) {
-//            cout << temp->data << " ";
-//            temp = temp->next;
+//    bool empty()
+//    {
+//        if (frontQ == NULL)
+//        {
+//            return true;
 //        }
-//        cout << endl;
+//        else
+//        {
+//            return false;
+//        }
 //    }
 //
+//    ~queue() {}
 //};
 //
-//struct Node {
-//    int data;
-//    Node* next;
-//    Node() {
-//        data = 0;
-//        next = NULL;
+//
+//struct vertices
+//{
+//    string cityName;
+//    bool visited;
+//    vertices()
+//    {
+//        visited = false;
+//        cityName = " ";
 //    }
-//    Node(int data) {
-//        this->data = data;
-//        next = NULL;
-//    }
+//    vertices(string city) : cityName(city) { visited = false; }
 //};
-//class QueueLinkedListAdt {
-//    int numItems;
+//
+//class Graph
+//{
 //public:
-//    Node* rear;
-//    Node* front;
-//    QueueLinkedListAdt() {
-//        rear = NULL;
-//        front = NULL;
-//        numItems = 0;
-//    }
-//    bool isEmpty() {
-//        return numItems == 0;
-//    }
-//    void enqueue(int data) {
-//        Node* newNode = new Node(data);
-//        if (isEmpty()) {
-//            front = newNode;
-//            rear = newNode;
-//        }
-//        else {
-//            rear->next = newNode;
-//            rear = newNode;
-//        }
-//        numItems++;
-//    }
-//    void dequeue() {
-//        if (isEmpty()) {
-//            cout << "\nQueue is already empty.\n";
-//            return;
-//        }
-//        numItems--;
-//        //num = front->data;
-//        Node* deletedNode = front;
-//        front = front->next;
-//        delete deletedNode;
-//    }
-//    void makeNull() {
-//
-//        while (!isEmpty()) {
-//            dequeue();
-//        }
-//    }
-//    ~QueueLinkedListAdt() {
-//        makeNull();
-//    }
-//};
-//
-////implement a graph using adjacency matrix
-//class Graph {
-//    int** adjMat;
+//    vertices arr[100]; // array of vertices (cities) in the graph (array of objects)
+//    int edge[100][100]; // 2D array of edges (distances) between vertices (cities) in the graph
 //    int numVertices;
-//public:
-//    Graph(int numVert) {
-//        numVertices = numVert;
-//        adjMat = new int* [numVertices];
-//        for (int i = 0; i < numVertices; i++) {
-//            adjMat[i] = new int[numVertices];
-//            for (int j = 0; j < numVertices; j++) {
-//                adjMat[i][j] = 0;
+//    queue q;
+//
+//    Graph() : numVertices(0) {}
+//
+//    void AddVertex(string vertex)
+//    {
+//        if (numVertices < 100)
+//        {
+//            arr[numVertices] = vertex; // Add the vertex to the array 
+//            for (int index = 0; index <= numVertices; index++)
+//            {
+//                edge[numVertices][index] = NULL_EDGE; // Initialize the new row
+//                edge[index][numVertices] = NULL_EDGE; // Initialize the new column
 //            }
+//            numVertices++;
+//        }
+//        else
+//        {
+//            cout << "Graph is full. Cannot add more vertices.\n";
 //        }
 //    }
-//    void addEdge(int i, int j) {
-//        cout << "Enter Weight:";
-//        int weight;
-//        cin >> weight;
-//        adjMat[i][j] = weight;
-//        adjMat[j][i] = weight;
-//    }
+//    void BFS(string startCity)
+//    {
+//        int startVertex = FindIndex(startCity);
 //
-//    void removeEdge(int i, int j) {
-//        adjMat[i][j] = 0;
-//        adjMat[j][i] = 0;
-//    }
+//        if (startVertex == -1)
+//        {
+//            cout << "City not found in the graph.\n";
+//            return;
+//        }
 //
-//    void bfsTraversal(int v) {
 //        bool* visited = new bool[numVertices];
-//        for (int i = 0; i < numVertices; i++) {
+//        // manually set visited to false
+//        for (int i = 0; i < numVertices; i++)
+//        {
 //            visited[i] = false;
 //        }
-//        QueueLinkedListAdt q;
-//        q.enqueue(v);
-//        visited[v] = true;
 //
-//        while (!q.isEmpty()) {
-//            int cur = q.front->data;
-//            cout << cur << " ";
-//            q.dequeue();
-//            for (int i = 0; i < numVertices; i++) {
-//                if (adjMat[cur][i] != 0 && !visited[i]) {
-//                    q.enqueue(i);
+//        visited[startVertex] = true;
+//        q.push(startVertex);
+//
+//        while (!q.empty())
+//        {
+//            int front = q.top();
+//            cout << arr[front].cityName << " "; // Print city name instead of vertex index
+//            q.pop();
+//
+//            for (int i = 0; i < numVertices; ++i)
+//            {
+//                if (edge[front][i] != NULL_EDGE && !visited[i])
+//                {
 //                    visited[i] = true;
+//                    q.push(i);
 //                }
 //            }
 //        }
+//
+//        delete[] visited;
 //    }
-//    void dfsTraversal(int v) {
+//
+//    void DFS(string startCity)
+//    {
+//        // dfs using array
+//        int startVertex = FindIndex(startCity);
+//        if (startVertex == -1)
+//        {
+//            cout << "City not found in the graph.\n";
+//            return;
+//        }
+//        // know make array of bool
 //        bool* visited = new bool[numVertices];
-//        for (int i = 0; i < numVertices; i++) {
+//        // manually set visited to false
+//        for (int i = 0; i < numVertices; i++)
+//        {
 //            visited[i] = false;
 //        }
-//        StackAdt s;
-//        s.push(v);
+//        // call dfs util
+//
+//        DFSUtil(startVertex, visited);
+//    }
+//    void DFSUtil(int v, bool* visited)
+//    {
 //        visited[v] = true;
-//        while (!s.isEmpty()) {
-//            int cur = s.top->data;
-//            cout << cur << " ";
-//            s.pop(cur);
-//            for (int i = 0; i < numVertices; i++) {
-//                if (adjMat[cur][i] != 0 && !visited[i]) {
-//                    s.push(i);
-//                    visited[i] = true;
+//        cout << arr[v].cityName << " "; // Print city name instead of vertex index
+//
+//        for (int i = 0; i < numVertices; ++i)
+//        {
+//            if (edge[v][i] != NULL_EDGE && !visited[i])
+//            {
+//                DFSUtil(i, visited);
+//            }
+//        }
+//    }
+//    void PrintAllNeighbors(int vertex)
+//    {
+//        if (vertex < 0 || vertex >= numVertices)
+//        {
+//            cout << "Invalid vertex. Please enter a vertex within the range of 0 to " << numVertices - 1 << ".\n";
+//            return;
+//        }
+//
+//        cout << "Neighbors of vertex " << arr[vertex].cityName << ":\n";
+//        for (int i = 0; i < numVertices; i++)
+//        {
+//            if (edge[vertex][i] != NULL_EDGE)
+//            {
+//                cout << " - " << arr[i].cityName << "\n";
+//            }
+//        }
+//    }
+//    void AddEdge(string fromCity, string toCity, int weight)
+//    {
+//        int fromVertex = FindIndex(fromCity);
+//        int toVertex = FindIndex(toCity);
+//
+//        if (fromVertex == -1 || toVertex == -1)
+//        {
+//            cout << "One or both cities not found in the graph.\n";
+//            return;
+//        }
+//
+//        // Set the weight of the edge in both directions
+//        edge[fromVertex][toVertex] = weight;
+//        edge[toVertex][fromVertex] = weight; // Assuming an undirected graph
+//    }
+//
+//    int FindIndex(string city)
+//    {
+//        for (int i = 0; i < numVertices; i++)
+//        {
+//            if (arr[i].cityName == city)
+//                return i;
+//        }
+//        return -1; // Return -1 if the city is not found
+//    }
+//
+//    bool isCyclicUtil(int v, bool visited[], int parent, int endVertex) // endVertex is the vertex we want to reach from v (startVertex) 
+//    {
+//        visited[v] = true;
+//
+//        for (int i = 0; i < numVertices; i++)
+//        {
+//            if (!visited[i] && edge[v][i] != NULL_EDGE) // if the vertex is not visited and there is an edge between v and i
+//            {
+//                if (isCyclicUtil(i, visited, v, endVertex)) // recursively call the function with i as the new startVertex and v as the parent
+//                    return true; // if the function returns true, return true from here as well
+//            }
+//            else if (i != parent && edge[v][i] != NULL_EDGE) // if the vertex is visited and there is an edge between v and i,  and i is not the parent of v
+//            { // i cannot under stand why i did this  i != parent 
+//                // this is because if we have a cycle in the graph then we will reach the parent of the start vertex again
+//                if (i == endVertex) // if i is the endVertex, return true
+//                    return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    void checkCycle(string startCity, string endCity)
+//    {
+//        int startVertex = FindIndex(startCity);
+//        int endVertex = FindIndex(endCity);
+//
+//        if (startVertex == -1 || endVertex == -1)
+//        {
+//            cout << "One or both cities not found in the graph.\n";
+//            return;
+//        }
+//
+//        // Create a visited array
+//        bool* visited = new bool[numVertices];
+//        for (int i = 0; i < numVertices; i++)
+//            visited[i] = false;
+//
+//        if (isCyclicUtil(startVertex, visited, -1, endVertex))
+//        {
+//            cout << "Graph contains cycle between " << startCity << " and " << endCity << "\n";
+//        }
+//        else
+//        {
+//            cout << "Graph doesn't contain cycle between " << startCity << " and " << endCity << "\n";
+//        }
+//    }
+//
+//    int minDistance(int dist[], bool visited[])
+//    {
+//        int min = INT_MAX, min_index;
+//
+//        for (int v = 0; v < numVertices; ++v)
+//        {
+//            if (!visited[v] && dist[v] <= min)
+//            {
+//                min = dist[v];
+//                min_index = v;
+//            }
+//        }
+//        return min_index;
+//    }
+//
+//    void dijeckstra(string src, string dest)
+//    {
+//        int srcIndex = FindIndex(src);
+//        int destIndex = FindIndex(dest);
+//
+//        if (srcIndex == -1 || destIndex == -1)
+//        {
+//            cout << "One or both cities not found in the graph.\n";
+//            return;
+//        }
+//
+//        int dist[100];
+//
+//        bool visited[100] = { false };
+//
+//        for (int i = 0; i < numVertices; ++i)
+//        {
+//            dist[i] = INFINITY_VALUE;
+//        }
+//
+//        dist[srcIndex] = 0;
+//
+//        for (int count = 0; count < numVertices - 1; ++count)
+//        {
+//            int u = minDistance(dist, visited);
+//            visited[u] = true;
+//            for (int v = 0; v < numVertices; ++v)
+//            {
+//                if (!visited[v] && edge[u][v] != NULL_EDGE && dist[u] != INFINITY_VALUE && (dist[u] + edge[u][v]) < dist[v])
+//                {
+//                    dist[v] = dist[u] + edge[u][v];
 //                }
 //            }
-//
+//        }
+//        cout << "Shortest path from " << arr[srcIndex].cityName << " to " << arr[destIndex].cityName << ": ";
+//        if (dist[destIndex] == INFINITY_VALUE)
+//        {
+//            cout << "No path exists.\n";
+//        }
+//        else
+//        {
+//            cout << dist[destIndex] << " km\n";
 //        }
 //    }
 //
-//    void primsAlgorithm(int root) {
-//        minHeap h(numVertices);
-//       
-//        // now set distance for all the vertices to infinity
-//        int* distance = new int[numVertices];
-//        for (int i = 0; i < numVertices; i++) {
-//			distance[i] = INT_MAX;
-//		}
-//        distance[root] = 0; // distance of the root from itself is 0
-//        h.insert(root); // insert the root in the heap
-//        while (!h.isEmpty()) {
-//            int cur = h.getMin(); // get the edge with the minimum weight
-//			h.extractMin(); // delete the edge with the minimum weight
-//            for (int i = 0; i < numVertices; i++) {
-//                if (adjMat[cur][i] != 0 && distance[i] > adjMat[cur][i]) {
-//					distance[i] = adjMat[cur][i];
-//					h.insert(i);
-//				}
-//			}
+//    void DisplayMatrix()
+//    {
+//        cout << "Cost Matrix:\n";
+//        for (int i = 0; i < numVertices; i++)
+//        {
+//            cout << " " << arr[i].cityName;
 //        }
-//        // now print the distance of all the vertices from the root
-//        for (int i = 0; i < numVertices; i++) {
-//            cout << distance[i] << " ";
+//        cout << "\n";
+//
+//        for (int i = 0; i < numVertices; i++)
+//        {
+//            cout << arr[i].cityName;
+//            for (int j = 0; j < numVertices; j++)
+//            {
+//                if (edge[i][j] == NULL_EDGE)
+//                    cout << " 0";
+//                else
+//                    cout << " " << edge[i][j];
+//            }
+//            cout << "\n";
 //        }
-//        delete[] distance;
 //    }
+//
+//    void updateEdge()
+//    {
+//        string fromCity, toCity;
+//        int fare;
+//        cout << "Enter the name of the first city: ";
+//        cin >> fromCity;
+//        cout << "Enter the name of the second city: ";
+//        cin >> toCity;
+//        cout << "Enter the new fare: ";
+//        cin >> fare;
+//
+//        int fromVertex = FindIndex(fromCity);
+//        int toVertex = FindIndex(toCity);
+//
+//        if (fromVertex == -1 || toVertex == -1)
+//        {
+//            cout << "One or both cities not found in the graph.\n";
+//            return;
+//        }
+//
+//        // Update the weight of the edge in both directions
+//        edge[fromVertex][toVertex] = fare;
+//        edge[toVertex][fromVertex] = fare; // Assuming an undirected graph
+//    }
+//
+//    ~Graph() {}
 //};
-//int main() {
-//    Graph g(5);
-//    g.addEdge(0, 1);
-//    g.addEdge(0, 2);
-//    g.addEdge(0, 3);
-//    g.addEdge(1, 4);
-//    g.addEdge(2, 4);
-//    g.addEdge(3, 4);
-//    g.bfsTraversal(4);
-//    cout << endl;
-//    g.dfsTraversal(0);
-//    cout << endl;
-//    g.primsAlgorithm(0);
-//    return 0;
 //
+//void MainMenu()
+//{
+//    cout << "Main Menu:\n";
+//    cout << "1. Add Vertex\n";
+//    cout << "2. Update Edge\n";
+//    cout << "3. Add Edge\n";
+//    cout << "4. Check the cycle\n";
+//    cout << "5. Print All Neighbors of a Vertex\n";
+//    cout << "6. Print Cost Matrix\n";
+//    cout << "7. Shortest Path\n";
+//    cout << "8. BFS\n";
+//    cout << "9. DFS\n";
+//    cout << "0. Exit\n";
+//    cout << "Enter your choice: ";
+//}
+//
+//int main()
+//{
+//    Graph myGraph;
+//
+//    int choice;
+//    do
+//    {
+//        MainMenu();
+//        cin >> choice;
+//
+//        switch (choice)
+//        {
+//        case 1:
+//        {
+//            string city;
+//            myGraph.AddVertex("Lahore");
+//            myGraph.AddVertex("ISB");
+//            myGraph.AddVertex("Karachi");
+//            myGraph.AddVertex("Multan");
+//            break;
+//        }
+//        case 2:
+//        {
+//            myGraph.updateEdge();
+//            break;
+//        }
+//        case 3:
+//        {
+//            myGraph.AddEdge("Lahore", "ISB", 400);
+//            myGraph.AddEdge("ISB", "Multan", 540);
+//            myGraph.AddEdge("Multan", "Karachi", 840);
+//            break;
+//        }
+//        case 4:
+//        {
+//            myGraph.checkCycle("Lahore", "Karachi");
+//            break;
+//        }
+//        case 5:
+//        {
+//            int vertex;
+//            cout << "Enter vertex value to get neighbors: ";
+//            cin >> vertex;
+//            myGraph.PrintAllNeighbors(vertex);
+//            break;
+//        }
+//        case 6:
+//            myGraph.DisplayMatrix();
+//            break;
+//        case 7:
+//            myGraph.dijeckstra("Lahore", "Karachi");
+//            break;
+//        case 8:
+//        {
+//            string startCity;
+//            cout << "Enter the starting city for BFS: ";
+//            cin >> startCity;
+//            cout << "BFS traversal starting from city " << startCity << ": ";
+//            myGraph.BFS(startCity);
+//            cout << endl;
+//            break;
+//        }
+//        case 9:
+//        {
+//            string startCity;
+//            cout << "Enter the starting city for DFS: ";
+//            cin >> startCity;
+//            cout << "DFS traversal starting from city " << startCity << ": ";
+//            myGraph.DFS(startCity);
+//            cout << endl;
+//            break;
+//        }
+//
+//        case 0:
+//            cout << "Exiting program.\n";
+//            break;
+//        default:
+//            cout << "Invalid choice. Try again.\n";
+//            break;
+//        }
+//
+//    } while (choice != 0);
+//
+//    return 0;
 //}

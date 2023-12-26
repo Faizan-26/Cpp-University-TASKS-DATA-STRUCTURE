@@ -36,7 +36,8 @@
 //		else {
 //			if (node->left == nullptr && node->right == nullptr) {
 //				delete node;
-//				return nullptr;
+//				node = nullptr;
+//				return node;
 //			}
 //			else if (node->left == nullptr) {
 //				AvlNode* temp = node;
@@ -62,7 +63,7 @@
 //			int balance = height(node->left) - height(node->right);
 //
 //			if (balance == 2) {
-//				if (height(node->left->left) - height(node->left->right) == 1) {
+//				if (node->data < node->left->data) {
 //					return singleRotationWithLeft(node);
 //				}
 //				else {
@@ -70,7 +71,7 @@
 //				}
 //			}
 //			else if (balance == -2) {
-//				if (height(node->right->right) - height(node->right->left) == 1) {
+//				if (node->data < node->right->data) {
 //					return singleRotationWithRight(node);
 //				}
 //				else {
@@ -86,12 +87,7 @@
 //	AvlTree() {
 //		root = NULL;
 //	}
-//	/*int height(AvlNode * node) {
-//		if (node == NULL) {
-//			return 0;
-//		}
-//		else node->height;
-//	}*/
+//	
 //
 //	int height(AvlNode* node) {
 //		if (node == NULL) {
@@ -136,6 +132,7 @@
 //		node->right = tempNode->left;
 //		tempNode->left = node;
 //		node->height = max(height(node), height(tempNode)) + 1;
+//		tempNode->height = max(height(node), height(tempNode)) + 1;
 //		return tempNode;
 //	}
 //
@@ -185,7 +182,7 @@
 //		else {
 //			cout << "\nYour data already exist in tree.\n";
 //		}
-//		node->height = max(height(node->left), height(node->right));
+//		node->height = max(height(node->left), height(node->right))+1;
 //		return node;
 //	}
 //	void inFixDisplay(AvlNode* r) {
